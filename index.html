@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="my-wiki">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="minimum-scale=1.0">
+    <title>My Wiki</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div ng-view></div>
+
+<!--
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
+    <script type="text/javascript" src='https://cdn.firebase.com/v0/firebase.js'></script>
+    <script type="text/javascript" src='https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js'></script>
+-->
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
+    <script type="text/javascript" src="bower_components/angular-fire/angularfire.min.js"></script>
+
+    <script type="text/javascript" src="app/modules.js"></script>
+    <script type="text/javascript" src="app/my-wiki.js"></script>
+    <script type="text/javascript" src="app/my-wiki-data.js"></script>
+    <script type="text/javascript" src="app/my-wiki-href-patch.js"></script>
+  </body>
+</html>
+
+

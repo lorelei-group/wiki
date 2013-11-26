@@ -1,0 +1,112 @@
+/**********
+ * Restet *
+ **********/
+
+body, html {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #31B1DF;
+}
+
+a.new {
+  color: inherit;
+}
+
+a.button, button {
+  border: 1px solid gray;
+  background-color: #333;
+  color: #31B1DF;
+  margin: 0 .5em;
+  padding: .75em .5em;
+}
+
+input[type=text] {
+  background-color: #555;
+  border: 1px solid white;
+  padding: .5em;
+  font-size: 1em;
+  width: 200px;
+}
+
+/***********
+ * Article *
+ ***********/
+
+#toc, .noprint, .thumb, .mw-editsection, .reference {
+  display: none;
+}
+
+body {
+  background-color: #000000;
+  color: #E0E0E0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 100;
+  padding: .5em;
+}
+
+h1 { font-size: 2em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.1em; }
+
+h1, h2, h3 {
+  color: inherit;
+  font-weight: inherit;
+  padding: .5em 0;
+  line-height: 1.1em;
+}
+
+article {
+  margin-top: 50px;
+  text-align: justify;
+  line-height: 1.5em;
+}
+
+article p, article ul {
+  margin: 1em 0;
+}
+
+
+/***********
+ * Layouts *
+ ***********/
+
+[article-item] {
+  margin: 1em;
+}
+[article-item] a {
+  float: left;
+  margin: 0.5em;
+}
+[article-item] button { float: right }
+[article-item] .clearfix { clear: both }
+
+.topbar h1 {
+  margin: 0;
+  padding: 0.25em;
+}
+
+.topbar a {
+  float: right;
+}
+
+.topbar.fixed {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  padding: 1em;
+  width: 100%;
+  top: 0;
+}
+
+.notification {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  color: #548324;
+  font-weight: bold;
+  position: fixed;
+  padding: 1em;
+  bottom: 20px;
+  right: 20px;
+}
