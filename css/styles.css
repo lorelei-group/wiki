@@ -165,3 +165,21 @@ input[type="text"] {
 .topbar h1 {
    font-weight: bold;
 }
+
+
+/*********
+ * Fonts *
+ *********/
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(open_sans_light.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(open_sans.ttf) format('truetype');
+}

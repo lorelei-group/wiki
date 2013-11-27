@@ -1,12 +1,10 @@
 CACHE MANIFEST
+# v3
 
-# v2
-
-http://fonts.googleapis.com/css?family=Open+Sans:300,400
-http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3SZ2oysoEQEeKwjgmXLRnTc.ttf
-http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTZS3E-kSBmtLoNJPDtbj2Pk.ttf
-reset.css
-styles.css
+css/reset.css
+css/styles.css
+css/open_sans_light.ttf
+css/open_sans.ttf
 bower_components/angular/angular.js
 bower_components/angular-route/angular-route.js
 bower_components/firebase/firebase.js
