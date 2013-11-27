@@ -4,8 +4,9 @@ angular.module('wiki-articles')
 
 .factory('download', function($timeout, $rootScope, Set, storage, wikipedia) {
   var interval;
+  var storedPending = localStorage['my-wiki|pending'];
+  var pending = new Set(storedPending ? JSON.parse(storedPending) : null);
   var downloading = new Set();
-  var pending = new Set();
 
   window.pending = $rootScope.pendingDownloads = pending.items;
   window.downloading = $rootScope.downloading = downloading.items;
@@ -27,11 +28,14 @@ angular.module('wiki-articles')
   };
 
   timer.tick.bind(timer);
-  window.addEventListener('online',  timer.tick);
-
   pending._onChange = function(value) {
+    localStorage['my-wiki|pending'] = JSON.stringify(value);
     timer[value.length ? 'start' : 'stop']();
   };
+
+  window.addEventListener('online',  timer.tick);
+  if (window.onLine)
+    timer.tick();
 
   function download(entry) {
     var key = entry.key || entry;
