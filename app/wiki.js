@@ -60,12 +60,15 @@ angular.module('wiki')
   $scope.delete = articles.remove;
   $scope.archive = articles.archive;
 
+  var lastSearch;
   $scope.$watch('term', function(value) {
     if (!value) {
       $scope.results = null;
     } else {
+      lastSearch = value;
       wikipedia.search(value, 'es').then(function(results) {
-        $scope.results = results.map(articles.getIfExists);
+        if (value === lastSearch)
+          $scope.results = results.map(articles.getIfExists);
       });
     }
   });
