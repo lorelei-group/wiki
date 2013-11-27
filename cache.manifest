@@ -1,4 +1,7 @@
 CACHE MANIFEST
+
+# v1
+
 http://fonts.googleapis.com/css?family=Open+Sans:300,400
 http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3SZ2oysoEQEeKwjgmXLRnTc.ttf
 http://themes.googleusercontent.com/static/fonts/opensans/v6/DXI1ORHCpsQm3Vp6mXoaTZS3E-kSBmtLoNJPDtbj2Pk.ttf
@@ -12,7 +15,7 @@ app/modules.js
 app/wiki.js
 app/wiki-articles.js
 app/wiki-data.js
-app/my-wiki-href-patch.js
+app/wiki-href-patch.js
 app/inbox.html
 app/archive.html
 app/article.html
