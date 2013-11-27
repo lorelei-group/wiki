@@ -4,18 +4,15 @@ angular.module('my-wiki-data')
 
 .factory('jsonp', function($http, $q) {
   return function jsonp(url, params) {
-    var callback = 'my_jsonp' + Date.now() + Math.round(Math.random() * 100000);
-    var deferred = $q.defer();
     params = params || {};
-    params.callback = callback;
+    params.callback = 'JSON_CALLBACK';
 
-    window[callback] = function(response) {
-      delete window[callback];
-      deferred.resolve(response);
-    };
-
-    $http.jsonp(url, { params: params });
-    return deferred.promise;
+    return $http.jsonp(url, {
+      params: params,
+      timeout: 5000,
+    }).then(function(result) {
+      return result.data;
+    });
   };
 })
 
@@ -40,6 +37,7 @@ angular.module('my-wiki-data')
       prop: 'text',
       page: key
     }).then(function(result) {
+      if (result.error) throw result.error;
       var match = result.parse.text['*'].match(/<ol>\n<li>REDIRECT <a href="\/wiki\/([^"]+)/);
       if (match) return article(match[1], language);
       return result.parse;
@@ -82,6 +80,11 @@ angular.module('my-wiki-data')
 
     has: function(key) {
       return !!this.keys[key];
+    },
+
+    clear: function() {
+      this.keys = {};
+      this.items.length = 0;
     },
 
     _onChange: function() { },
@@ -131,81 +134,6 @@ angular.module('my-wiki-data')
     get: get,
     save: save,
     remove: remove,
-  };
-})
-
-.factory('articles', function(storage, wikipedia) {
-  function getIfExists(key) {
-    var article = storage.get(key);
-    update(article);
-    return article;
-  }
-
-  function get(key) {
-    var article = storage.get(key);
-    update(article);
-    download(article);
-    return article;
-  }
-
-  function update(article) {
-    article.onInbox = storage.inbox.has(article.key);
-    article.archived = storage.archive.has(article.key);
-    article.stored = article.onInbox || article.archived;
-    return article;
-  }
-
-  function save(key) {
-    key = key.key || key;
-    storage.inbox.add(key);
-    storage.archive.remove(key);
-    var article = get(key);
-    storage.save(article);
-    return article;
-  }
-
-  function archive(article) {
-    storage.inbox.remove(article.key);
-    storage.archive.add(article.key);
-    storage.save(article);
-    return get(article.key);
-  }
-
-  function remove(article) {
-    var key = article.key || article;
-    storage.inbox.remove(key);
-    storage.archive.remove(key);
-    storage.remove(key);
-  }
-
-  var downloading = [];
-  function download(article) {
-    var key = article.key || article;
-    var entry = storage.get(key);
-    if (entry.content) return;
-
-    downloading.push(key);
-    wikipedia.article(key, 'es').then(function(result) {
-      var content = result.text['*'].replace(/{{+([^}]*)}}+/g, '{-{$1}-}');
-      entry.content = '<h1>' + result.title + '</h1>\n' + content;
-      entry.title = result.title;
-      storage.save(entry);
-    }).finally(function() {
-      var index = downloading.indexOf(key);
-      downloading.splice(index, 1);
-    });
-  }
-
-  return window.data = {
-    getIfExists: getIfExists,
-    get: get,
-    update: update,
-    save: save,
-    archive: archive,
-    remove: remove,
-    inInbox: storage.inbox.items,
-    inArchive: storage.archive.items,
-    downloading: downloading,
   };
 })
 

@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <span class="notification downloading" ng-show="downloading.length">
+      Descargando {{ downloading.length }} ({{ downloading.join(', ') }})
+    </span>
+    <span class="notification pending" ng-show="pendingDownloads.length">
+      Pendiente descargar {{ pendingDownloads.length }} artículos ({{ pendingDownloads.join(', ') }})
+    </span>
     <div ng-view></div>
 
 <!--
@@ -25,6 +31,7 @@
 
     <script type="text/javascript" src="app/modules.js"></script>
     <script type="text/javascript" src="app/my-wiki.js"></script>
+    <script type="text/javascript" src="app/my-wiki-articles.js"></script>
     <script type="text/javascript" src="app/my-wiki-data.js"></script>
     <script type="text/javascript" src="app/my-wiki-href-patch.js"></script>
   </body>

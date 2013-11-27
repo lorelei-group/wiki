@@ -25,9 +25,8 @@ angular.module('my-wiki')
   var article = articles.get($routeParams.article);
   $scope.article = article;
   $scope.save = articles.save;
-  $scope.archive = articles.archive.bind(null, article);
-  $scope.delete = articles.remove.bind(null, article);
-  $scope.downloading = articles.downloading;
+  $scope.archive = articles.archive;
+  $scope.delete = articles.remove;
 
   $scope.$watch('downloading', function(value) {
     console.log('watch fired', value);
