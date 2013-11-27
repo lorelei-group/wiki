@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('my-wiki-articles')
+angular.module('wiki-articles')
 
 .factory('download', function($timeout, $rootScope, Set, storage, wikipedia) {
   var interval;

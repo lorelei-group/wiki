@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('my-wiki', [
+angular.module('wiki', [
   'ngRoute',
-  'my-wiki-articles',
-  'my-wiki-href-patch',
+  'wiki-articles',
+  'wiki-href-patch',
 ]);
 
-angular.module('my-wiki-articles', [
-  'my-wiki-data',
+angular.module('wiki-articles', [
+  'wiki-data',
 ]);
 
-angular.module('my-wiki-data', []);
-angular.module('my-wiki-href-patch', []);
+angular.module('wiki-data', []);
+angular.module('wiki-href-patch', []);

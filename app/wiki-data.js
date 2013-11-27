@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('my-wiki-data')
+angular.module('wiki-data')
 
 .factory('jsonp', function($http, $q) {
   return function jsonp(url, params) {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('my-wiki-href-patch')
+angular.module('wiki-href-patch')
 
 .directive('href', function($compile) {
   return {

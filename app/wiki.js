@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('my-wiki')
+angular.module('wiki')
 
 .config(function($routeProvider) {
   $routeProvider
