@@ -9,12 +9,14 @@ angular.module('mq-wiki-directives')
     scope.$watch(function(scope) {
       return scope.$eval(attrs.wikiContent);
     }, function(value) {
+      var showImages = 'wikiShowImages' in attrs;
       var lang = element.getAttribute('lang');
       var fragment = document.createDocumentFragment();
       var container = fragment.appendChild(document.createElement('div'));
       container.innerHTML = value || '';
 
-      angular.element(fragment.querySelectorAll('img')).remove();
+      if (!showImages)
+        angular.element(fragment.querySelectorAll('img')).remove();
       angular.element(fragment.querySelectorAll('[href^="/w/index.php?title="]')).removeAttr('href');
 
       map.call(fragment.querySelectorAll('[href^="/wiki/"]'), function(child) {
