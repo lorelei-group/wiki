@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html manifest="cache.manifest" ng-app="mq-wiki">
+<html manifest="manifest.1.appcache" ng-app="mq-wiki">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta name="viewport" content="minimum-scale=1.0">
-    <meta name="viewport" content="maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <title>My Wiki</title>
     <link rel="stylesheet" href="css/reset.css">
@@ -22,12 +20,17 @@
         message="Pendiente de descargar"></div>
     </div>
 
+    <mq-appcache-update>
+      A new version is available, tap here to reload.
+    </mq-appcache-update>
+
     <div ng-view></div>
 
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
     <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>
 
+    <script type="text/javascript" src="mq/mq-appcache.js"></script>
     <script type="text/javascript" src="mq/mq-localstorage.js"></script>
     <script type="text/javascript" src="mq/mq-emitter.js"></script>
     <script type="text/javascript" src="mq/mq-set.js"></script>

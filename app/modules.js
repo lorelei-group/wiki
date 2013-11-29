@@ -3,6 +3,7 @@
 angular.module('mq-wiki', [
   'ngTouch',
   'ngRoute',
+  'mq-appcache',
   'mq-wiki-storage',
   'mq-wiki-wikipedia',
   'mq-wiki-directives',

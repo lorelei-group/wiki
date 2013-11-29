@@ -55,7 +55,7 @@ angular.module('mq-wiki')
   $scope.$watch('lang', mqLocalStorage.get.bind(null, 'lang'));
 })
 
-.controller('NotificationsCtrl', function($scope, articles) {
+.controller('NotificationsCtrl', function($scope, $window, articles) {
   function key(id) {
     return id.split('|')[1];
   }
@@ -74,6 +74,10 @@ angular.module('mq-wiki')
     console.log('clearing', type);
     articles[type].clear();
     console.log(articles[type].items.length);
+  };
+
+  $scope.reload = function() {
+    $window.location.reload();
   };
 })
 
