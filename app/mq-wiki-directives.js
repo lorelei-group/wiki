@@ -1,10 +1,17 @@
 'use strict';
 angular.module('mq-wiki-directives')
 
-.directive('wikiContent', function() {
+.directive('wikiContent', function(ngClickDirective) {
+  var ngClick = ngClickDirective[0];
   return function(scope, elem, attrs) {
     var element = elem[0];
     var map = Array.prototype.forEach;
+
+    scope.onLink = function(id) {
+      scope.toInbox(id);
+      event.preventDefault();
+      event.stopPropagation();
+    };
 
     scope.$watch(function(scope) {
       return scope.$eval(attrs.wikiContent);
@@ -20,18 +27,16 @@ angular.module('mq-wiki-directives')
       angular.element(fragment.querySelectorAll('[href^="/w/index.php?title="]')).removeAttr('href');
 
       map.call(fragment.querySelectorAll('[href^="/wiki/"]'), function(child) {
-        function onInteract(event) {
-          scope.toInbox(id);
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
         var key = decodeURIComponent(child.getAttribute('href').substr(6));
         var id = lang + '|' + key;
 
-        child.setAttribute('fake-ng-click', 'save(\'' + id + '\')');
-        child.addEventListener('click', onInteract);
-        child.addEventListener('touchend', onInteract);
+        var action = 'onLink(\'' + id + '\')';
+        child.setAttribute('ng-click', action);
+
+        // HACK: We don't want to compile the full document because it can have
+        //     angular-like html, so we invoke just ngClick over the element.
+        //     element.on('click') does not work with touch.
+        ngClick.compile(child)(scope, angular.element(child), { ngClick: action });
       });
 
       element.appendChild(fragment);
