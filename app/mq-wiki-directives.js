@@ -4,19 +4,20 @@ angular.module('mq-wiki-directives')
 .directive('wikiContent', function() {
   return function(scope, elem, attrs) {
     var element = elem[0];
-    var map = Array.prototype.map;
+    var map = Array.prototype.forEach;
 
     scope.$watch(function(scope) {
       return scope.$eval(attrs.wikiContent);
     }, function(value) {
       var lang = element.getAttribute('lang');
-      element.innerHTML = value || 'Cargando...';
+      var fragment = document.createDocumentFragment();
+      var container = fragment.appendChild(document.createElement('div'));
+      container.innerHTML = value || '';
 
-      map.call(element.querySelectorAll('[href^="/w/index.php?title="]'), function(child) {
-        child.removeAttribute('href');
-      });
+      angular.element(fragment.querySelectorAll('img')).remove();
+      angular.element(fragment.querySelectorAll('[href^="/w/index.php?title="]')).removeAttr('href');
 
-      map.call(element.querySelectorAll('[href^="/wiki/"]'), function(child) {
+      map.call(fragment.querySelectorAll('[href^="/wiki/"]'), function(child) {
         function onInteract(event) {
           scope.toInbox(id);
           event.preventDefault();
@@ -30,6 +31,8 @@ angular.module('mq-wiki-directives')
         child.addEventListener('click', onInteract);
         child.addEventListener('touchend', onInteract);
       });
+
+      element.appendChild(fragment);
     });
   };
 })
