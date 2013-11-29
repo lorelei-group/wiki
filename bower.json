@@ -1,0 +1,15 @@
+{
+  "name": "mq-wiki",
+  "version": "1.0.0",
+  "authors": [
+    "A. Matías Quezada <amatiasq@gmail.com>"
+  ],
+  "description": "A offline web wiki reader",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular-route": "~1.2.3",
+    "angular-touch": "~1.2.3"
+  }
+}

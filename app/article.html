@@ -1,7 +1,0 @@
-<div ng-show="!fullscreen" class="topbar fixed">
-  <button ng-click="back()">&lt;=</button>
-  <button ng-show="!article.onInbox" ng-click="save(article)">Inbox</button>
-  <button ng-show="!article.archived" ng-click="archive(article)">Archive</button>
-  <button ng-show="article.stored" ng-click="delete(article)">Delete</button>
-</div>
-<article id="article" compile="article.content" ng-click="fullscreen = !fullscreen"></article>

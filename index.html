@@ -1,39 +1,134 @@
 <!DOCTYPE html>
-<html manifest="cache.manifest" ng-app="wiki">
+<html manifest="cache.manifest" ng-app="mq-wiki">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width">
     <meta name="viewport" content="minimum-scale=1.0">
+    <meta name="viewport" content="maximum-scale=1.0">
+
     <title>My Wiki</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
-    <span ng-cloak class="notification downloading" ng-show="downloading.length">
-      Descargando {{ downloading.length }} ({{ downloading.join(', ') }})
-    </span>
-    <span ng-cloak class="notification pending" ng-show="pendingDownloads.length">
-      Pendiente descargar {{ pendingDownloads.length }} artículos ({{ pendingDownloads.join(', ') }})
-    </span>
+
+    <div ng-cloak class="notifications" ng-controller="NotificationsCtrl">
+      <div mq-notification="downloading"
+        on-swipe="empty('downloading')"
+        message="Descargando"></div>
+
+      <div mq-notification="pending"
+        on-swipe="empty('pending')"
+        message="Pendiente de descargar"></div>
+    </div>
+
     <div ng-view></div>
 
-<!--
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
-    <script type="text/javascript" src='https://cdn.firebase.com/v0/firebase.js'></script>
-    <script type="text/javascript" src='https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js'></script>
--->
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
-    <script type="text/javascript" src="bower_components/firebase/firebase.js"></script>
-    <script type="text/javascript" src="bower_components/angular-fire/angularfire.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>
+
+    <script type="text/javascript" src="mq/mq-localstorage.js"></script>
+    <script type="text/javascript" src="mq/mq-emitter.js"></script>
+    <script type="text/javascript" src="mq/mq-set.js"></script>
+    <script type="text/javascript" src="mq/mq-timer.js"></script>
 
     <script type="text/javascript" src="app/modules.js"></script>
-    <script type="text/javascript" src="app/wiki.js"></script>
-    <script type="text/javascript" src="app/wiki-articles.js"></script>
-    <script type="text/javascript" src="app/wiki-data.js"></script>
-    <script type="text/javascript" src="app/wiki-href-patch.js"></script>
+    <script type="text/javascript" src="app/mq-wiki.js"></script>
+    <script type="text/javascript" src="app/mq-wiki-directives.js"></script>
+    <script type="text/javascript" src="app/mq-wiki-storage.js"></script>
+    <script type="text/javascript" src="app/mq-wiki-articles.js"></script>
+    <script type="text/javascript" src="app/mq-wiki-wikipedia.js"></script>
+    <script type="text/javascript" src="app/mq-wiki-set.js"></script>
+
+
+
+    <script type="text/ng-template" id="app/notification.html">
+      <div ng-show="list.length"
+        ng-click="display = !display"
+        ng-dblclick="onSwipe()"
+        ng-swipe-right="onSwipe()"
+        ng-swipe-left="onSwipe()">
+
+        <span class="notification {{ name }} closed" ng-show="!display">
+          {{ list.length }}
+        </span>
+        <span class="notification {{ name }} open" ng-show="display">
+          {{ message }} {{ list.length }} art&iacute;culo(s) ({{ list.join(', ') }})
+        </span>
+      </div>
+    </script>
+
+
+
+    <script type="text/ng-template" id="app/article-item.html">
+      <a ng-href="#/wiki/{{ article.lang }}/{{ article.key }}">
+        ({{ article.lang }}) {{ article.title || article.key }}
+      </a>
+      <button ng-show="!article.onArchive" ng-click="toArchive(article)">Archive</button>
+      <button ng-show="!article.onInbox" ng-click="toInbox(article)">Inbox</button>
+      <div class="clearfix"></div>
+    </script>
+
+
+
+    <script type="text/ng-template" id="app/article.html">
+      <div ng-show="!fullscreen" class="article topbar fixed">
+        <a class="button" href="#/inbox">&lt;=</a>
+        <button ng-show="!article.onInbox" ng-click="toInbox(article)">Inbox</button>
+        <button ng-show="!article.onArchive" ng-click="toArchive(article)">Archive</button>
+        <button class="delete" ng-show="article.stored" ng-click="remove(article)">Delete</button>
+      </div>
+      <article id="article"
+        lang="{{ article.lang }}"
+        wiki-content="article.content"
+        ng-click="fullscreen = !fullscreen"></article>
+    </script>
+
+
+    <script type="text/ng-template" id="app/archive.html">
+      <div class="topbar">
+        <a href="#/inbox" class="button">Inbox</a>
+        <h1>Archive</h1>
+        <input type="text" ng-model="term.key" placeholder="Filter articles">
+      </div>
+      <ul>
+        <li ng-repeat="article in articles|filter:term track by $index" article-item></li>
+      </ul>
+    </script>
+
+
+
+    <script type="text/ng-template" id="app/inbox.html">
+      <div class="topbar">
+        <a href="#/archive" class="button">Archive</a>
+        <h1>INBOX</h1>
+
+        <select ng-model="lang">
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="eo">Pikachu</option>
+        </select>
+
+        <input type="text" placeholder="Search new articles..."
+           ng-model="term"
+           wikisearch="results"
+           wikisearch-lang="lang">
+        <button ng-show="term" ng-click="term = ''">x</button>
+      </div>
+
+      <div ng-show="results.length">
+        <h3>Results for: {{ term }}</h3>
+        <ul>
+          <li ng-repeat="article in results track by $index" article-item></li>
+        </ul>
+      </div>
+
+      <ul ng-show="!results.length">
+        <li ng-repeat="article in articles track by $index" article-item></li>
+      </ul>
+    </script>
   </body>
 </html>
-
-

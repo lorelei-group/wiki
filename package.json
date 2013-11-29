@@ -1,0 +1,19 @@
+{
+  "name": "mq-wiki",
+  "version": "1.0.0",
+  "description": "A offline web wiki reader",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lorelei-group/wiki"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/lorelei-group/wiki/issues"
+  },
+  "homepage": "https://github.com/lorelei-group/wiki"
+}

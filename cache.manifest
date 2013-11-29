@@ -1,22 +1,27 @@
 CACHE MANIFEST
-# v4
+# 1.0.0.0
 
 css/reset.css
 css/styles.css
 css/open_sans_light.ttf
 css/open_sans.ttf
+
 bower_components/angular/angular.js
 bower_components/angular-route/angular-route.js
-bower_components/firebase/firebase.js
-bower_components/angular-fire/angularfire.min.js
+bower_components/angular-touch/angular-touch.js
+
+mq/mq-localstorage.js
+mq/mq-timer.js
+mq/mq-emitter.js
+mq/mq-set.js
+
 app/modules.js
-app/wiki.js
-app/wiki-articles.js
-app/wiki-data.js
-app/wiki-href-patch.js
-app/inbox.html
-app/archive.html
-app/article.html
+app/mq-wiki.js
+app/mq-wiki-directives.js
+app/mq-wiki-storage.js
+app/mq-wiki-articles.js
+app/mq-wiki-wikipedia.js
+app/mq-wiki-set.js
 
 NETWORK:
 *

@@ -39,6 +39,7 @@ input[type=text] {
 
 #toc,
 .thumb,
+a.image,
 .noprint,
 .reference,
 .mw-editsection {
@@ -98,6 +99,9 @@ article ul {
 .topbar a {
   float: right;
 }
+.article.topbar a {
+  float: none;
+}
 
 .topbar.fixed {
   background-color: rgba(0, 0, 0, 0.8);
@@ -105,17 +109,6 @@ article ul {
   padding: 1em;
   width: 100%;
   top: 0;
-}
-
-.notification {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  color: #548324;
-  font-weight: bold;
-  position: fixed;
-  padding: 1em;
-  bottom: 20px;
-  right: 20px;
 }
 
 
@@ -182,4 +175,37 @@ input[type="text"] {
   font-style: normal;
   font-weight: 400;
   src: local('Open Sans'), local('OpenSans'), url(open_sans.ttf) format('truetype');
+}
+
+
+/*****************
+ * Notifications *
+ *****************/
+
+.notification {
+  color: #FFFFFF;
+  font-weight: bold;
+  position: fixed;
+  padding: 1em;
+  bottom: 2em;
+}
+
+.notification.closed {
+  border-radius: 20px;
+}
+
+.notification.open {
+  border-radius: 10px;
+  right: 2em;
+  left: 2em;
+}
+
+.notification.downloading {
+  background-color: rgba(0, 200, 0, 0.5);
+  right: 2em;
+}
+
+.notification.pending {
+  background-color: rgba(200, 0, 0, 0.5);
+  left: 2em;
 }
