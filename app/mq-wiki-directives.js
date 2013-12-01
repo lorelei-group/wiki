@@ -30,7 +30,7 @@ angular.module('mq-wiki-directives')
         var key = decodeURIComponent(child.getAttribute('href').substr(6));
         var id = lang + '|' + key;
 
-        var action = 'onLink(\'' + id + '\')';
+        var action = 'onLink(\'' + id.replace('\'', '\\\'') + '\')';
         child.setAttribute('ng-click', action);
 
         // HACK: We don't want to compile the full document because it can have
