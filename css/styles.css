@@ -219,14 +219,15 @@ body.mq-appcache-update {
 }
 
 mq-appcache-update {
+  display: none;
   background-color: rgba(100, 200, 80, 0.7);
-  color: #FFFFFF;
-  padding: .5em;
   text-align: center;
   font-weight: bold;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  color: #FFFFFF;
+  padding: .5em;
   z-index: 100;
+  right: 0;
+  left: 0;
+  top: 0;
 }
