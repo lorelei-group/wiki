@@ -1,0 +1,73 @@
+@import "styles/reset.css";
+@import "styles/reset.less";
+@import "styles/layout.less";
+@import "article/article.less";
+@import "notifications/notifications.less";
+
+
+/*********
+ * Fonts *
+ *********/
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(open_sans_light.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(open_sans.ttf) format('truetype');
+}
+
+
+/*************
+ * MA styles *
+ *************/
+
+button,
+.button {
+    border: none;
+    background-color: #006285;
+    border-radius: 2px;
+    -o-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    color: #FFF;
+    margin: 0 .5em;
+    padding: .75em 1.2em;
+    font-family: "Open sans";
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #161616;
+    -o-text-shadow: 1px 1px 1px #161616;
+    -moz-text-shadow: 1px 1px 1px #161616;
+    -webkit-text-shadow: 1px 1px 1px #161616;
+}
+
+button:hover,
+.button:hover {
+    cursor: pointer;
+    background-color: #FF770D;
+    transition: background-color 0.4s;
+    -o-text-shadow: background-color 0.4s;
+    -moz-text-shadow: background-color 0.4s;
+    -webkit-text-shadow: background-color 0.4s;
+
+}
+
+input[type="text"] {
+    border: none;
+    background-color: #EEE;
+    border-radius: 2px;
+    padding: .6em 1em;
+    font: normal 0.9em / normal "Open Sans";
+    min-width: 200px;
+}
+
+.topbar h1 {
+   font-weight: bold;
+}
+
+

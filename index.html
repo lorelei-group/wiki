@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html manifest="manifest.1.appcache" ng-app="mq-wiki">
+<!--<html manifest="manifest.1.appcache" ng-app="mq-wiki">-->
+<html manifest="manifest.1.appcache">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -26,9 +27,7 @@
 
     <div ng-view></div>
 
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
-    <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>
+    <script type="text/javascript" src="bower_components/requirejs/require.js" data-main="app/config.js"></script>
 
     <script type="text/javascript" src="mq/mq-appcache.js"></script>
     <script type="text/javascript" src="mq/mq-localstorage.js"></script>
